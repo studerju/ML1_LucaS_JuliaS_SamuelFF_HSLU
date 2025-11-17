@@ -1,0 +1,184 @@
+---
+title: "Examples of Collapsible Parts"
+author: "Niels Hagenbuch"
+date: "August 2025"
+output:
+  html_document: 
+    code_folding: hide
+---
+
+<br>
+
+
+## Entire Sections
+
+If you wish to show/hide entire sections in your text, use the "collapsible" functionality of HTML documents.
+
+Text to be included within a collapsible section is enclosed between
+
+    <button type="button" class="collapsible">TEXT in the GRAY BAR</button>
+    <div class="content">
+      <p>
+
+and
+
+     </p>
+    </div>
+
+Somewhere in the document, the necessary style definitions must be included. (To see them, check the `.Rmd` source of this file at the bottom.)
+
+<br>
+
+
+### Example:
+
+
+
+##### 4. Pooled _t_-Test
+
+In this approach, the pre-post mean difference of the paired observations and the difference of the means calculated from the unpaired observations.
+
+$$T_\mathrm{pooled} = \frac{\bar{D} + \big(\bar{X}_{0,U} - \bar{X}_{1,U}\big)}{\sqrt{\frac{1}{n}S^2_D + \big(\frac{1}{n_0} + \frac{1}{n_1}\big)S^2_U}}$$
+
+<button type="button" class="collapsible">Details of $T_\mathrm{pooled}$</button>
+<div class="content">
+  <p>
+with $\bar{X}_{0,U} = \frac{1}{n_0}\sum_{i=n+1}^{n+n_0} X_{0,i}$ and $\bar{X}_{1,U} = \frac{1}{n_1}\sum_{i=n+n_0+1}^{n+n_0+n_1} X_{1,i}$, $\bar{D}$ and $S_D^2$ as in Approach 2, and
+
+$$S_U^2 = \frac{\sum_{i = n + 1}^{n + n_0}\big(X_{0,i} - \bar{X}_{0,U}\big)^2 + \sum_{i = n + n_0 + 1}^{n + n_0 + n_1}\big(X_{1,i} - \bar{X}_{1,U}\big)^2}{n_0 + n_1 + 2}$$
+  </p>
+</div>
+<br>
+
+Using an appropriate sampling variance, $T_\mathrm{pooled}$ follows an approximate _t_ distribution with degrees of freedom estimated by Welch's and Satterthwaite's method.
+
+<button type="button" class="collapsible">Details of $\mathrm{df_{WS}}$</button>
+<div class="content">
+  <p>
+$$\mathrm{df_{WS}} \approx \frac{\Big(\frac{1}{n}S_D^2 + \big(\frac{1}{n_0} + \frac{1}{n_1}\big)S_U^2\Big)^2}{\frac{S_D^4}{n^2(n-1)} + \frac{S_U^4}{\big(1/n_0 + 1/n_1\big)^2(n_0 + n_1 - 2)}}.$$ 
+  </p>
+</div>
+<br>
+
+
+
+<br>
+<br>
+
+---
+
+<br>
+
+
+
+
+
+## Code Chunks
+
+In HTML, the content of code chunks can be shown/hidden by clicking the button `Show`/`Hide`. All that is needed is the option `code_folding: hide` or `code_folding: show` under `output` / `html_document`. Note the indentation using two and four spaces.  
+
+    output:
+      html_document: 
+        code_folding: hide
+
+
+All chunks with the `echo` option set to `TRUE` (display the code in the document) are represented with a `Code`/`Hide` button. (If `echo = FALSE`, no button is shown.) This allows to show/hide chunks selectively.
+
+To open/close all chunks in one go, use the pull-down menu `Code` in the top right corner of the page to toggle between `Show All Code` and `Hide All Code`.
+
+
+
+<br>
+
+### Example:
+
+$\pi$ can be numerically approximated using $\pi/4 = \int_0^1\frac{1}{1 + x^2}\text{d}x$:
+
+```{r blabla, echo = FALSE}
+##  Some instructions that are irrelevant for the document
+##  and are not necessary to be shown/hidden. There will be
+##  no "Code" button in the HTML document.
+##
+```
+
+```{r setup, echo = TRUE}
+N <- 1000
+x <- seq(from = 1 / (2 * N), to = 1, by = 1 / N)
+y <- 1 / (1 + x^2)
+```
+
+```{r num.pi, echo = TRUE}
+4 * sum(y) / N
+```
+
+
+<br>
+<br>
+
+---
+
+<br>
+
+
+
+### Source:
+
+<https://www.w3schools.com/howto/howto_js_collapsible.asp>
+
+<https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_collapsible>
+
+
+<!--
+=========================================
+ Machinery for the collapsible sections.
+=========================================
+
+References:
+-----------
+https://www.w3schools.com/howto/howto_js_collapsible.asp
+https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_collapsible
+-->
+
+<style>
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+</style>
+
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+

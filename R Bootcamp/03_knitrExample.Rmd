@@ -1,0 +1,364 @@
+---
+title: "Examples"
+author: "You"
+date: "August 2025"
+output:
+  html_document:
+    highlight: tango   # for line numbering to work
+---
+
+
+
+
+# Control Sequences
+
+This is a basic example demonstrating some features of R Markdown and knitr. 
+
+The value of x is `r round(x <- sqrt(2), 4)` and displayed here.
+
+After the transformation, x is
+`r print(exp(asin(tan(cos(sin((x))))))-128/365.25*x^3)`.
+
+
+
+<br>
+
+--------------------------------------------------------------------------------
+
+<br>
+
+
+
+```{r sqrt2}
+x <- sqrt(2)
+x
+
+x.tr <- exp(asin(tan(cos(sin((x)))))) - 128/365.25 * x^3
+x.tr
+```
+
+
+
+<br>
+
+--------------------------------------------------------------------------------
+
+<br>
+
+
+
+# R Chunks
+
+```{r SANDBOX, eval = FALSE, echo = FALSE}
+# Develop your
+# R code
+# here
+```
+
+
+
+<br>
+
+--------------------------------------------------------------------------------
+
+<br>
+
+
+
+<!-- The chunk option "echo = FALSE" and "include = FALSE" prevent code and results from appearing in the output. knitr runs the code in the chunk, and the results can be used by other chunks. -->
+
+```{r knitr-setup, include = FALSE}
+library(knitr)
+opts_chunk$set(echo = FALSE, include = FALSE)
+```
+
+```{r R-setup}
+##  More settings and "global variables".
+options(show.signif.stars = FALSE)
+rnd <- 2   ##  Number of decimals to round.
+```
+
+
+
+<br>
+
+--------------------------------------------------------------------------------
+
+<br>
+
+
+
+# R Tables
+
+```{r Kable, include = TRUE}
+iris$noise <- rnorm(n = nrow(iris))
+kable(iris[1:10, -5])
+```
+
+
+
+<br>
+
+--------------------------------------------------------------------------------
+
+<br>
+
+
+
+With a caption:
+
+```{r Kable2, include = TRUE}
+kable(iris[1:10, -5], digits = 4,
+      align = c("llccr"),
+      caption = "Tab. 1: First 10 Observations
+                 in the Famous Iris Data Set.")
+```
+
+
+
+<br>
+
+--------------------------------------------------------------------------------
+
+<br>
+
+
+
+```{r FlexTable}
+library(flextable)
+
+##  Create table, and indicate column names to be included
+##  with the argument col_keys (nothing is printed yet).
+rt <- regulartable(head(mtcars), col_keys = 
+                   c("hp", "wt", "gear", "mpg"))
+```
+
+
+
+<br>
+
+--------------------------------------------------------------------------------
+
+<br>
+
+
+
+Flextable:
+
+```{r FlexTable2, include = TRUE}
+##  Give columns proper names in the table.
+rt <- set_header_labels(rt, hp = "Horsepower",
+                        wt = "Weight",
+                        gear = "No. of Gears",
+                        mpg = "Miles/Gallon")
+
+##  Make header bold and outcome italic.
+rt <- bold(rt, part = "header")
+rt <- italic(rt, j = 4)   ##  Make column 4 italic.
+
+##  Adjust widths and heights of cells.
+rt <- autofit(rt)
+rt
+```
+
+
+
+<br>
+
+--------------------------------------------------------------------------------
+
+<br>
+
+
+
+# R Plots
+
+```{r Sine, include = TRUE}
+plot(sin, -pi, 2 * pi)
+title(main = substitute(paste("Sine from ", -pi, " to 2", pi)))
+```
+
+
+
+<br>
+
+--------------------------------------------------------------------------------
+
+<br>
+
+
+
+```{r knitr-setup2, include = FALSE}
+opts_chunk$set(echo = FALSE, include = FALSE,
+               fig.path = "Figures/", dev = "jpeg")
+```
+
+
+```{r Sine2, include = TRUE}
+plot(sin, -pi, 2 * pi)
+title(main = substitute(paste("Sine from ", -pi, " to 2", pi)))
+```
+
+
+
+<br>
+
+--------------------------------------------------------------------------------
+
+<br>
+
+
+
+```{r SineSmall, include = TRUE, fig.height = 3, fig.width = 3}
+plot(sin, -pi, 2 * pi)
+```
+
+
+
+<br>
+
+--------------------------------------------------------------------------------
+
+<br>
+
+
+
+```{r Cosine, include = TRUE, fig.cap = "Fig. 2: A cosine curve."}
+plot(cos, -pi, 2 * pi)
+```
+
+
+
+<br>
+
+--------------------------------------------------------------------------------
+
+<br>
+
+
+
+# Line Numbers for Code Blocks
+
+Line numbers for code can be added.
+
+In the header of the document, a syntax highlight theme needs to be provided:
+
+    output:
+      html_document:
+        highlight: tango
+
+<br>
+
+In the chunks, the options `echo` and `include` need to be set to `TRUE`, even if there is no output.
+
+
+
+<br>
+
+--------------------------------------------------------------------------------
+
+<br>
+
+
+
+Code is displayed like this:
+
+```{r DataCars, echo = TRUE, include = TRUE, attr.source = ".numberLines"}
+##  Load the data set.
+data(cars)
+
+##  Transform the var. 'speed'.
+cars$speed2 <- cars$speed^2
+```
+
+The numbers start with 1 in each code block.
+
+```{r DataAnalysis, echo = TRUE, include = TRUE, attr.source = ".numberLines"}
+fm <- lm(dist ~ 1 + speed + speed2, data = cars)
+#plot(fm)
+summary(fm)
+```
+
+
+
+<br>
+
+--------------------------------------------------------------------------------
+
+<br>
+
+
+
+# Commenting-out R Code
+
+The square root of 2 (i.e., `r sqrt(2)`) has many decimals.
+
+```{r SqrtOf2, echo = TRUE, include = TRUE}
+y <- 2
+y.sqrt <- sqrt(2)
+c("y" = y, "Sqrt of y" = y.sqrt)
+```
+
+
+<br>
+
+The square root of 2 <!--(i.e., `r sqrt(2)`)--> has many decimals.
+
+<!--
+```{r SqrtOf2-2, echo = TRUE, include = TRUE}
+y <- 2
+y.sqrt <- sqrt(2)
+c("y" = y, "Sqrt of y" = round(y.sqrt, 4))
+```
+-->
+
+<br>
+
+Use the `#` and `eval = FALSE`:
+
+The square root of 2 <!--(i.e., `r #sqrt(2)`)--> has many decimals.
+
+<!--
+```{r SqrtOf2-3, eval = FALSE, echo = TRUE, include = TRUE}
+y <- 2
+y.sqrt <- sqrrt(2)  <--- NOW ALLOWS FOR ERRORS AND WRONG SYNTAX !!!
+c("y" = y, "Sqrt of y" = round(y.sqrt, 4))
+```
+-->
+
+Hic finis.
+
+
+
+<br>
+
+--------------------------------------------------------------------------------
+
+<br>
+
+
+
+# R Code in Chunk Options
+
+```{r PlotSettings}
+##  Settings for HTML.
+fig.h <- 4; fig.w <- 6; fig.scale <- 1
+
+##  Explicit settings for PDF.
+#fig.h <- 8; fig.w <- 12
+
+##  Or using a scaling factor.
+fig.scale <- 1.5
+```
+
+
+```{r PlotAirquality, include = TRUE, fig.height = fig.h * fig.scale, fig.width = fig.w * fig.scale, fig.cap = paste0("The plot is based on ", nrow(na.omit(airquality[,c("Temp","Ozone")])), " (of ", nrow(airquality), ") measurements (", sum(is.na(airquality$Ozone)), " missing values in var. `Ozone`, ", sum(is.na(airquality$Temp)), " missing values in var. `Temp`).")}
+plot(Ozone ~ Temp, data = airquality, ylab = "Ozone conc. (in ppb)", xlab = "Temperature (in ºF)", main = "New York (May to September 1973)")
+```
+
+
+
+
+
+
+

@@ -1,0 +1,144 @@
+---
+title: "Early detection and risk stratification of heart disease"
+author: "Luca Signorini, Samuel Frei, Julia Studer"
+date: "15.11.2025"
+output:
+  html_document:
+    highlight: tango   # for line numbering to work
+---
+
+
+
+
+# Introduction
+
+Motivation, research question, context
+
+Use case: A regional hospital wants to improve its preventive care and identify patients with an increased risk of heart disease at an early stage.
+Until now, risk assessment has mainly been carried out by doctors on the basis of individual factors (age, BMI, blood pressure). However, the hospital wants to understand:
+Which factors have the greatest influence on the risk of heart disease
+How these factors reinforce or weaken each other
+Whether modern machine learning models provide better predictions than traditional statistics
+At what thresholds the risk increases significantly
+How patients can be given targeted preventive care
+To this end, the hospital has commissioned our project team to analyze the Person Health Indicator dataset.
+
+The overarching question of the project
+“How well can the risk of heart disease be predicted using personal health indicators, and which factors have the strongest influence?”
+We answer this question in two dimensions:
+I. Risk prediction (predictive task)
+Can a model reliably identify patients at increased risk?
+→ For this: GLM Binomial, SVM, Neural Network
+II. Risk explanation (interpretation task)
+Which factors drive the risk, and how do these effects unfold?
+→ For this: Linear Model, Poisson GLM, GAM 
+
+What the hospital ultimately receives
+A clear, clinically useful answer:
+Early warning model: Who is at risk?
+Top 5 main risk factors: What drives the risk?
+Threshold values: When does a factor become critical?
+Recommendations: Where is patient intervention worthwhile (exercise, BMI, sleep)?
+Model comparison: Which model is the most reliable?
+
+<br>
+--------------------------------------------------------------------------------
+
+<br>
+
+# 1. Data Preparation
+
+Origin of the dataset, 
+preparation of the original dataset for our analysis is described.
+
+<br>
+
+--------------------------------------------------------------------------------
+
+<br>
+
+# 2. Data Visualization
+
+Here the visualization of our dataset is described.
+
+<br>
+
+--------------------------------------------------------------------------------
+
+<br>
+
+# 3. Methods 
+
+Description of the models 
+
+## 3.1. Risk prediction: Can a model reliably identify patients at increased risk?
+
+### Generalized linear model Binomial
+
+Samuel
+
+### Support Vector machines
+
+Luca
+
+### Neural Network 
+
+Julia 
+
+## 3.2. Risk explanation: Which factors drive the risk, and how do these effects unfold?
+
+### Linear Model
+
+Luca
+
+### Generalized Linear Model Poisson
+
+Julia
+
+### Generalized Additive Model
+
+Samuel
+
+<br>
+
+--------------------------------------------------------------------------------
+
+<br>
+
+# 4. Results and Discussion
+
+Focus on main results
+• Tables and figures should provide evidence for main result
+• Precise and correct desription and interpretation of main results
+
+## 3.1. Risk prediction: Can a model reliably identify patients at increased risk?
+
+GLM Binomial (Samuel)
+
+SVM (Luca)
+
+NN (Julia)
+
+## 3.2. Risk explanation: Which factors drive the risk, and how do these effects unfold?
+
+LM (Luca)
+
+GLM Poisson (Julia)
+
+GAM (Samuel)
+
+<br>
+
+--------------------------------------------------------------------------------
+
+<br>
+
+# 5. Conclusion
+
+• Summary of most important findings
+• Put findings into a broader context
+• Ideas for further research
+
+<br>
+
+--------------------------------------------------------------------------------
